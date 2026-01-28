@@ -1,4 +1,4 @@
-name: feature-pipeline
+name: feature pipeline
 on: 
  workflow_dispatch: 
 jobs:
