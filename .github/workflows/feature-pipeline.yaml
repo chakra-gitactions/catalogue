@@ -1,0 +1,11 @@
+name: feature-pipeline
+on: 
+ workflow_dispatch: 
+jobs:
+ feature-pipeline:
+  uses: chakra-gitactions/workflow/feature-nodejs-pipeline.yaml@main
+  with:
+      project: roboshop
+      component: catalogue
+      environment: dev
+    secrets: inherit
