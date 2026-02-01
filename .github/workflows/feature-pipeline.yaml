@@ -1,11 +1,18 @@
-name: feature pipeline
-on: 
- workflow_dispatch: 
+name: catalogue
+on:
+ workflow_dispatch:
+permissions:
+  statuses: write
+  contents: read
 jobs:
- feature-pipeline:
-  uses: chakra-gitactions/workflows/.github/workflows/feature-nodejs-pipeline.yaml@main
-  with:
-      project: roboshop
-      component: catalogue
-      environment: dev
-  secrets: inherit
+  catalogue:
+   uses: chakra-gitactions/workflows/.github/workflows/nodejs-pipeline.yaml@main
+   with:
+    project: roboshop
+    component: catalogue
+    environment: dev
+   secrets: inherit #In GitHub Actions, secrets: inherit is used in reusable workflows 
+                    #to allow the caller workflow to pass its own secrets automatically to the called workflow.
+   #secrets:
+     #MY_TOKEN: ${{ secrets.MY_TOKEN }}
+     #API_KEY: ${{ secrets.API_KEY }}
