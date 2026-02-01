@@ -7,4 +7,4 @@ jobs:
    project: roboshop
    environment: dev
    component: catalogue
-  secrets: inherit  #passes the scerets to reusable workflow, by default github will not share the secrets.
+  secrets: inherit  #passes the scerets to reusable workflow, by default github wont share the secrets.
