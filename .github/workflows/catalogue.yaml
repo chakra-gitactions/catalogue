@@ -1,6 +1,9 @@
 name: catalogue
 on:
  workflow_dispatch:
+permissions:
+  statuses: write
+  contents: read
 jobs:
   catalogue:
    uses: chakra-gitactions/workflows/.github/workflows/nodejs-pipeline.yaml@main
