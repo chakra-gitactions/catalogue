@@ -1,11 +1,11 @@
 name: catalogue
-on:
- workflow_dispatch:
+on: [push]
 permissions:
   statuses: write
   contents: read
 jobs:
   catalogue:
+   if: github.ref != 'refs/heads/main'
    uses: chakra-gitactions/workflows/.github/workflows/nodejs-pipeline.yaml@main
    with:
     project: roboshop
