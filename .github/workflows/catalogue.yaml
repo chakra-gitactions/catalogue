@@ -1,10 +1,14 @@
 name: catalogue
 on: [push]
-jobs:
- catalogue:
+permissions:
+  checks: write
+  statuses: write
+jobs: 
+ catalogue: # run the job only when it is feature branch
+  if: github.ref != 'refs/heads/main'
   uses: chakra-gitactions/workflows/.github/workflows/nodejs-pipeline.yaml@main
   with:
    project: roboshop
    environment: dev
    component: catalogue
-  secrets: inherit  #passes the scerets to reusable workflow, by default github wont share the secrets.
+  secrets: inherit  
