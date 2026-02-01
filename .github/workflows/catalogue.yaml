@@ -1,0 +1,10 @@
+name: catalogue
+on: [push]
+jobs:
+ catalogue:
+  uses: chakra-gitactions/workflows/.github/workflows/nodejs-pipeline.yaml@main
+  with:
+   project: roboshop
+   environment: dev
+   component: catalogue
+  secrets: inherit  #passes the scerets to reusable workflow, by default github wont share the secrets.
