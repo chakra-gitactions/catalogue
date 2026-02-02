@@ -1,21 +1,23 @@
 name: catalogue
 on: [push]
-permissions:
+permissions:            # The permissions are required for github api to post the status to commit id.
   checks: write
   statuses: write
 jobs: 
- catalogue-ci: # run the job only when it is feature branch
-  if: github.ref != 'refs/heads/main'
-  uses: chakra-gitactions/workflows/.github/workflows/nodejs-pipeline.yaml@main
-  with:
+ catalogue-ci: # run the job only when it is feature branch, this is CI pipeline and runs in feature branch only.  
+  if: github.ref != 'refs/heads/main'     # Everytime a new commit id is pushed to feature branch the pipeline is triggered.
+  uses: chakra-gitactions/workflows/.github/workflows/nodejs-pipeline.yaml@main   #The job is calling a remote/re-usable pipeline.
+  with:  # Passing the values to the input parameters of the reusable pipeline.
    project: roboshop
    environment: dev
    component: catalogue
-  secrets: inherit  
+  secrets: inherit    # Allows calling program pass the secrets to the re-usable pipeline. By default, it is not allowed.
+                      # We can restrict the access to only required secrets.
 
- catalogue-deploy: # run the job only when it is feature branch
-  if: github.ref == 'refs/heads/main'
-  uses: chakra-gitactions/workflows/.github/workflows/dev-pipeline.yaml@main
+ catalogue-deploy: # run the job only when it is Main branch.
+  if: github.ref == 'refs/heads/main'  # When a PR is raised from feature branch and merged with main branch.
+                                       # A merge commit is created which will trigger the dev pipeline on main branch.
+  uses: chakra-gitactions/workflows/.github/workflows/dev-pipeline.yaml@main     # The jobs used re-usable dev pipeline.
   with:
    project: roboshop
    environment: dev
