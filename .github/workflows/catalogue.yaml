@@ -1,0 +1,24 @@
+name: catalogue
+on: [push]
+permissions:
+  checks: write
+  statuses: write
+jobs: 
+ catalogue-ci: # run the job only when it is feature branch
+  if: github.ref != 'refs/heads/main'
+  uses: chakra-gitactions/workflows/.github/workflows/nodejs-pipeline.yaml@main
+  with:
+   project: roboshop
+   environment: dev
+   component: catalogue
+  secrets: inherit  
+
+ catalogue-deploy: # run the job only when it is feature branch
+  if: github.ref == 'refs/heads/main'
+  uses: chakra-gitactions/workflows/.github/workflows/dev-pipeline.yaml@main
+  with:
+   project: roboshop
+   environment: dev
+   component: catalogue
+  secrets: inherit  
+  
